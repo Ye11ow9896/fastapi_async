@@ -1,0 +1,30 @@
+## alembic migration
+# Создаем папку для миграций
+```
+alembic init migration
+```
+
+# В файле alembic.ini записываем адрес БД, в которой будем совершать миграции
+
+- sqlalchemy.url = postgresql://postgres:password@127.0.0.1:5432/name_bd
+
+# В файле migrations/env.py вносим изменения:
+```
+- импортируем Base нашей модели, согласно нашему проекту, например:
+```
+from components.users.models import Base
+
+- прописываем:
+```
+target_metadata = Base.metadata
+```
+
+# Далее создаем первую миграцию командой:
+```
+alembic revision --autogenerate -m "<description>"
+```
+
+# Для выполнения метода upgrade в файле миграции:
+```
+alembic upgrade head
+```

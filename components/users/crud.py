@@ -1,6 +1,6 @@
-import schemas
+from components.users import schemas
+from components.users.dal import UserDAL
 from db.db import async_session
-from main import UserDAL
 
 
 async def create_new_user(body: schemas.UserCreate) -> schemas.ShowUser:
@@ -13,10 +13,14 @@ async def create_new_user(body: schemas.UserCreate) -> schemas.ShowUser:
                 email=body.email
             )
             return schemas.ShowUser(
-                user_id=user.user_id,
+                id=user.id,
                 name=user.name,
+                surname=user.surname,
                 email=user.email,
                 is_active=user.is_active,
             )
+
+
+
 
 
