@@ -3,7 +3,7 @@ import uvicorn
 from fastapi import FastAPI
 
 
-app = FastAPI(title="ALEX TeST ASYNC")
+app = FastAPI(title="test async")
 app.include_router(router)
 
 
