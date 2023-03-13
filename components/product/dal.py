@@ -1,21 +1,27 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from components.users.models import User
+from components.product.models import Products
+from sqlalchemy.future import select
 
 
-class UserDAL:
+class ProductDAL:
     """Data Access Layer for creating user info"""
     def __init__(self, db: AsyncSession):
         self.db = db
 
-    async def create_user(
-            self, name: str, surname: str, email: str
-    ) -> User:
-        new_user = User(
+    async def create_product(
+            self, name: str, link: str, ave_price: float
+    ) -> Products:
+        new_product = Products(
             name=name,
-            surname=surname,
-            email=email,
+            link=link,
+            ave_price=ave_price
         )
-        self.db.add(new_user)
+        self.db.add(new_product)
         await self.db.flush()
-        return new_user
+        return new_product
+
+    async def show_all_products(self) -> Products:
+        query = select(Products)
+        products = await self.db.execute(self, query)
+        return products
 

@@ -27,10 +27,10 @@ def upgrade() -> None:
     )
     op.create_table('stats',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('priduct_id', sa.Integer(), nullable=True),
+    sa.Column('product_id', sa.Integer(), nullable=True),
     sa.Column('date', sa.TIMESTAMP(), nullable=False),
     sa.Column('price', sa.Numeric(precision=2, scale=7), nullable=False),
-    sa.ForeignKeyConstraint(['priduct_id'], ['product.id'], ),
+    sa.ForeignKeyConstraint(['product_id'], ['product.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

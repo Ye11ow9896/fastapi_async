@@ -1,11 +1,15 @@
 from fastapi import APIRouter
+from components.product import (schemas, crud)
 
-from components.users import (schemas, crud)
-
-router = APIRouter(prefix='/user', tags=['user'])
+product_router = APIRouter(prefix='/product', tags=['product'])
 
 
-@router.post("/")
-async def create_user(body: schemas.UserCreate) -> schemas.ShowUser:
-    return await crud.create_new_user(body=body)
+@product_router.post("/create")
+async def create(body: schemas.CreateProduct) -> schemas.ShowProduct:
+    return await crud.create_new_product(body=body)
+
+
+@product_router.get('/show_all')
+async def show_all() -> list[schemas.ShowProduct]:
+    return await crud.show_all_products()
 

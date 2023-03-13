@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-
 from components.users import (schemas, crud)
 
 router = APIRouter(prefix='/user', tags=['user'])
